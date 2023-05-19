@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Confirmação de Compra - Ticket Master</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+    }
+    .logo {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .logo img {
+      width: 100px;
+    }
+    .mensagem {
+      margin-top: 20px;
+      padding: 20px;
+      border: 1px solid #ccc;
+    }
+    .dados-evento {
+      margin-top: 20px;
+      padding: 20px;
+      border: 1px solid #ccc;
+    }
+    .assinatura {
+      margin-top: 20px;
+      padding: 20px;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="logo">
+    <img src="https://www.pngall.com/wp-content/uploads/12/Movie-Ticket-PNG-Photos.png" alt="Logo Ticket Master">
+  </div>
+  <div class="mensagem">
+    <p>Olá ${nome},</p>
+    <p>Recebemos a confirmação da sua compra no valor de R$ ${valorTotal}.</p>
+    <p>Por favor, apresente este e-mail junto com um documento com foto no dia do evento e o QRCODE em anexo.</p>
+  </div>
+  <div class="dados-evento">
+    <p>Detalhes do Evento:</p>
+    <p><strong>Nome:</strong> ${nomeEvento}</p>
+    <p><strong>Data:</strong> ${dataEvento} às ${horaEvento}</p>
+    <p><strong>Local:</strong> ${localEvento}</p>
+    <p><strong>ID do ingresso:</strong></p>
+  </div>
+  <div class="assinatura">
+    <p>Atenciosamente,</p>
+    <p>Equipe Ticket Master</p>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Link de pagamento</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .container {
+            margin: 0 auto;
+            max-width: 600px;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+        h1 {
+            font-size: 24px;
+            margin-top: 0;
+            text-align: center;
+        }
+        p {
+            font-size: 18px;
+            line-height: 1.5;
+            text-align: center;
+            margin-top: 10px;
+        }
+        .bold {
+            font-weight: bold;
+        }
+        .logo {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .logo img {
+            width: 100px;
+        }
+        a {
+            display: block;
+            margin: 20px auto 0;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 18px;
+            text-align: center;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+<div class="logo">
+    <img src="https://www.pngall.com/wp-content/uploads/12/Movie-Ticket-PNG-Photos.png" alt="Logo Ticket Master">
+</div>
+<div class="container">
+    <h1>Finalize o Pagamento</h1>
+    <p>Olá <span class="bold">${nome}</span>,</p>
+    <p>Seu ingresso para o evento <span class="bold">"${nomeEvento}"</span> está esperando por você!</p>
+    <p>Data do evento: <span class="bold">${dataEvento}</span></p>
+    <p>Hora do evento: <span class="bold">${horaEvento}</span></p>
+    <p>Valor total: <span class="bold">${valorTotal}</span></p>
+    <a href="${linkPagamento}">Pagar agora</a>
+</div>
+</body>
+</html>

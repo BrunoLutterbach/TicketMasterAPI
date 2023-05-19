@@ -1,0 +1,13 @@
+CRUD de eventos: Permitir o cadastro, consulta, atualização e exclusão de eventos que serão disponibilizados para venda.
+
+Gerenciamento de ingressos: Possibilitar a criação de ingressos para os eventos, com a definição de tipos (por exemplo, VIP, Pista, etc.), quantidade e preço.
+
+Venda de ingressos: Permitir a compra de ingressos pelos usuários, com validação de pagamento e envio de comprovante de compra.
+
+Controle de acesso: Implementar um sistema de validação de ingressos na entrada do evento, para garantir que apenas usuários com ingressos válidos possam acessar.
+
+Relatórios: Disponibilizar relatórios de vendas de ingressos e controle de acesso aos eventos, para auxiliar na análise de desempenho e planejamento de futuros eventos.
+
+Integração com meios de pagamento: Possibilitar a integração com meios de pagamento online, como PayPal ou PagSeguro, para facilitar o processo de compra de ingressos.
+
+Notificações: Implementar um sistema de notificações aos usuários sobre atualizações por e-mail nos eventos (por exemplo, mudanças de horário, cancelamento, etc.) e envio de comprovantes de compra.
