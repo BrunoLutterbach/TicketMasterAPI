@@ -15,8 +15,10 @@ import java.util.Collections;
 public class UsuarioService {
 
     final UsuarioRepository repository;
+    final RoleRepository roleRepository;
 
-    public DadosListagemUsuario cadastrar(DadosCadastroUsuario dados, RoleRepository roleRepository) {
+
+    public DadosListagemUsuario cadastrar(DadosCadastroUsuario dados) {
         var usuario = new Usuario(dados);
         var roles = roleRepository.findByName("ROLE_USER").get();
         usuario.setRoles(Collections.singletonList(roles));
@@ -32,4 +34,5 @@ public class UsuarioService {
     public void remover(Long id) {
         repository.deleteById(id);
     }
+
 }

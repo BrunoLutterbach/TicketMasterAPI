@@ -24,8 +24,6 @@ public record DadosCadastroEvento(
         int quantidadeIngressoDisponivel,
         @DecimalMin(value = "15.00")
         BigDecimal valorIngresso,
-        @NotNull
-        Long organizadorId,
         @JsonFormat(pattern = "dd/MM/yyyy")
         LocalDate dataEvento,
         @DateTimeFormat(pattern = "HH:mm")

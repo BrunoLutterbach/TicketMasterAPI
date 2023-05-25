@@ -8,7 +8,8 @@ public record DadosAtualizacaoEvento(
         List<String> imagens,
         String dataEvento,
         String statusEvento,
-        String categoriaEvento
+        String categoriaEvento,
+        int quantidadeIngressos
 
 ) {
     public DadosAtualizacaoEvento(Evento evento) {
@@ -18,7 +19,8 @@ public record DadosAtualizacaoEvento(
                 evento.getImagens(),
                 evento.getDataEvento().toString(),
                 evento.getStatusEvento().toString(),
-                evento.getCategoriaEvento().toString()
+                evento.getCategoriaEvento().toString(),
+                evento.getQuantidadeIngressos()
         );
     }
 }

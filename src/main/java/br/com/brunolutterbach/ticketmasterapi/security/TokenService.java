@@ -33,7 +33,7 @@ public class TokenService {
         }
     }
 
-    public String getSubject (String token) {
+    public String getSubject(String token) {
         try {
             var algoritimo = Algorithm.HMAC256(secret);
             return JWT.require(algoritimo)

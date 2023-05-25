@@ -3,6 +3,8 @@ package br.com.brunolutterbach.ticketmasterapi.model.evento;
 import br.com.brunolutterbach.ticketmasterapi.model.endereco.Endereco;
 import br.com.brunolutterbach.ticketmasterapi.model.enums.StatusEvento;
 import br.com.brunolutterbach.ticketmasterapi.model.ingresso.Ingresso;
+import br.com.brunolutterbach.ticketmasterapi.model.organizador.Organizador;
+import br.com.brunolutterbach.ticketmasterapi.model.usuario.Usuario;
 import lombok.Data;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -39,9 +41,14 @@ public class Evento {
     private StatusEvento statusEvento;
     @Enumerated(EnumType.STRING)
     private CategoriaEvento categoriaEvento;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Organizador organizador;
 
+    public Evento() {
 
-    public Evento(DadosCadastroEvento dados) {
+    }
+
+    public Evento(DadosCadastroEvento dados, Usuario usuarioLogado) {
         this.nome = dados.nome();
         this.descricao = dados.descricao();
         this.imagens = dados.imagens();
@@ -51,10 +58,7 @@ public class Evento {
         this.statusEvento = dados.statusEvento();
         this.categoriaEvento = dados.categoriaEvento();
         this.enderecoEvento = new Endereco(dados.endereco());
-    }
-
-    public Evento() {
-
+        this.organizador = usuarioLogado.getOrganizador();
     }
 
     public void atualizar(DadosAtualizacaoEvento dados) {
@@ -78,6 +82,9 @@ public class Evento {
         }
         if (dados.categoriaEvento() != null) {
             this.categoriaEvento = CategoriaEvento.valueOf(dados.categoriaEvento());
+        }
+        if (dados.quantidadeIngressos() != 0) {
+            this.quantidadeIngressos = dados.quantidadeIngressos();
         }
     }
 

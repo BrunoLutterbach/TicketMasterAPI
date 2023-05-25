@@ -2,6 +2,7 @@ package br.com.brunolutterbach.ticketmasterapi.model.usuario;
 
 import br.com.brunolutterbach.ticketmasterapi.model.endereco.Endereco;
 import br.com.brunolutterbach.ticketmasterapi.model.ingresso.Ingresso;
+import br.com.brunolutterbach.ticketmasterapi.model.organizador.Organizador;
 import br.com.brunolutterbach.ticketmasterapi.security.Roles;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -31,8 +32,10 @@ public class Usuario implements UserDetails {
     private List<Ingresso> ingressos;
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-    inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private List<Roles> roles = new ArrayList<>();
+    @OneToOne(mappedBy = "usuario")
+    private Organizador organizador;
 
 
     public Usuario(DadosCadastroUsuario dados) {

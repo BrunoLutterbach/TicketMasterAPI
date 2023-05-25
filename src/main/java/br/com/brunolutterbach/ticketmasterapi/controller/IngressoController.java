@@ -11,6 +11,7 @@ import br.com.brunolutterbach.ticketmasterapi.service.IngressoService;
 import br.com.brunolutterbach.ticketmasterapi.service.PayPalService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +30,7 @@ public class IngressoController {
     final PayPalService payPalService;
     final EmailService emailService;
 
+    @PreAuthorize("hasRole('USER')")
     @PostMapping("/comprar")
     public ResponseEntity<DadosPedidoIngressoDetalhado> comprarIngresso(@RequestBody DadosCompraIngresso dados, HttpServletRequest httpServletRequest) throws Exception {
         var pedido = ingressoService.comprarIngresso(dados, httpServletRequest);
@@ -65,6 +67,7 @@ public class IngressoController {
         return "Pagamento concluído com sucesso!";
     }
 
+    @PreAuthorize("hasRole('USER')")
     @GetMapping("/{id}")
     public ResponseEntity<List<DadosIngressosUsuario>> listarIngressosDoUsuario(@PathVariable Long id) {
         var ingressos = ingressoService.listarIngressosDoUsuario(id);
