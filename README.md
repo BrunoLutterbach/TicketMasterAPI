@@ -29,3 +29,13 @@ O sistema oferece as funcionalidades de autenticação, gerenciamento de usuári
 - Gerenciamento de organizadores: Possibilidade de cadastrar, atualizar e listar organizadores. __Os organizadores são usuários que recebem a ROLE_ORGANIZADOR para ter acesso a funcionalidades específicas.__
 
 - Autenticação e autorização: Implementação de autenticação e autorização de usuários com base em roles utilizando o Spring Security.
+
+
+#
+#### URL Deploy
+> 
+
+#
+
+### Rotas
+#
