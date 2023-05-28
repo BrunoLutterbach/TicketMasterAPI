@@ -1,5 +1,6 @@
 package br.com.brunolutterbach.ticketmasterapi.model.evento;
 
+import br.com.brunolutterbach.ticketmasterapi.model.endereco.DadosCadastroEndereco;
 import br.com.brunolutterbach.ticketmasterapi.model.endereco.DadosEndereco;
 import br.com.brunolutterbach.ticketmasterapi.model.enums.StatusEvento;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -33,6 +34,6 @@ public record DadosCadastroEvento(
         @NotNull
         CategoriaEvento categoriaEvento,
         @Valid
-        DadosEndereco endereco
+        DadosCadastroEndereco endereco
 ) {
 }

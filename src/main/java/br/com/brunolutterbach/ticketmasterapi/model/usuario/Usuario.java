@@ -35,6 +35,7 @@ public class Usuario implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private List<Roles> roles = new ArrayList<>();
     @OneToOne(mappedBy = "usuario")
+    @JoinColumn(unique = true)
     private Organizador organizador;
 
 

@@ -1,5 +1,6 @@
 package br.com.brunolutterbach.ticketmasterapi.service;
 
+import br.com.brunolutterbach.ticketmasterapi.model.endereco.DadosEndereco;
 import br.com.brunolutterbach.ticketmasterapi.model.usuario.DadosCadastroUsuario;
 import br.com.brunolutterbach.ticketmasterapi.model.usuario.DadosListagemUsuario;
 import br.com.brunolutterbach.ticketmasterapi.model.usuario.Usuario;
@@ -9,6 +10,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -35,4 +37,8 @@ public class UsuarioService {
         repository.deleteById(id);
     }
 
+    public List<DadosEndereco> buscarEnderecos(Long id) {
+        var usuario = repository.findById(id).orElseThrow();
+        return usuario.getEnderecos().stream().map(DadosEndereco::new).toList();
+    }
 }

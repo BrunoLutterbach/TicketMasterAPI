@@ -20,6 +20,10 @@ public class OrganizadorService {
 
 
     public DadosListagemUsuarioOrganizador cadastrarOrganizador(DadosCadastroOrganizador dados, Usuario usuarioLogado) {
+        if (usuarioLogado.getOrganizador() != null) {
+            throw new IllegalStateException("O usuário já possui um organizador.");
+        }
+
         var organizador = new Organizador(dados, usuarioLogado);
         usuarioLogado.getRoles().add(roleRepository.findByName("ROLE_ORGANIZADOR").get());
         repository.save(organizador);

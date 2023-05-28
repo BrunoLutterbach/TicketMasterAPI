@@ -9,6 +9,7 @@ import br.com.brunolutterbach.ticketmasterapi.service.EmailService;
 import br.com.brunolutterbach.ticketmasterapi.service.EventoService;
 import br.com.brunolutterbach.ticketmasterapi.service.IngressoService;
 import br.com.brunolutterbach.ticketmasterapi.service.PayPalService;
+import br.com.brunolutterbach.ticketmasterapi.utils.UsuarioLogadoUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -29,6 +30,7 @@ public class IngressoController {
     final EventoService eventoService;
     final PayPalService payPalService;
     final EmailService emailService;
+    final UsuarioLogadoUtil logadoUtil;
 
     @PreAuthorize("hasRole('USER')")
     @PostMapping("/comprar")
@@ -69,8 +71,16 @@ public class IngressoController {
 
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/{id}")
-    public ResponseEntity<List<DadosIngressosUsuario>> listarIngressosDoUsuario(@PathVariable Long id) {
+    public ResponseEntity<List<DadosIngressosUsuario>> listarIngressosDoUsuarioPorId(@PathVariable Long id) {
         var ingressos = ingressoService.listarIngressosDoUsuario(id);
         return ResponseEntity.ok(ingressos);
     }
+
+    @PreAuthorize("hasRole('USER')")
+    @GetMapping()
+    public ResponseEntity<List<DadosIngressosUsuario>> listarIngressosDoUsuario() {
+        var ingressos = ingressoService.listarIngressosDoUsuario(logadoUtil.obterUsuarioLogado().getId());
+        return ResponseEntity.ok(ingressos);
+    }
+
 }

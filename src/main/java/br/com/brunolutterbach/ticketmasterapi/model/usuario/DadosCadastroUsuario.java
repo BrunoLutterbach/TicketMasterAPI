@@ -1,5 +1,6 @@
 package br.com.brunolutterbach.ticketmasterapi.model.usuario;
 
+import br.com.brunolutterbach.ticketmasterapi.model.endereco.DadosCadastroEndereco;
 import br.com.brunolutterbach.ticketmasterapi.model.endereco.DadosEndereco;
 
 import javax.validation.Valid;
@@ -14,6 +15,6 @@ public record DadosCadastroUsuario(
         @NotBlank
         String senha,
         @Valid
-        List<DadosEndereco> enderecos
+        List<DadosCadastroEndereco> enderecos
 ) {
 }

@@ -8,6 +8,7 @@ import br.com.brunolutterbach.ticketmasterapi.model.ingresso.Ingresso;
 import br.com.brunolutterbach.ticketmasterapi.model.ingresso.validacoes.IngressoValidator;
 import br.com.brunolutterbach.ticketmasterapi.repository.IngressoRepository;
 import br.com.brunolutterbach.ticketmasterapi.repository.UsuarioRepository;
+import br.com.brunolutterbach.ticketmasterapi.utils.UsuarioLogadoUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -31,6 +32,7 @@ public class IngressoService {
     final IngressoValidator ingressoValidator;
     final UsuarioRepository usuarioRepository;
     final EmailService emailService;
+    final UsuarioLogadoUtil logadoUtil;
 
 
     public void cadastrar(Ingresso ingresso) {
@@ -40,7 +42,7 @@ public class IngressoService {
     public DadosPedidoIngressoDetalhado comprarIngresso(DadosCompraIngresso dados, HttpServletRequest httpServletRequest) throws Exception {
         List<Ingresso> ingressos = new ArrayList<>();
         BigDecimal valorTotal = BigDecimal.ZERO;
-        var usuario = usuarioRepository.findById(1L).get();
+        var usuario = logadoUtil.obterUsuarioLogado();
 
         for (int i = 0; i < dados.quantidade(); i++) {
             var ingresso = repository.findFirstByEventoIdAndCompradorIsNull(dados.idEvento());

@@ -45,6 +45,4 @@ public class OrganizadorController {
         var organizadores = orgService.listarOrganizadores(pageable);
         return ResponseEntity.ok(organizadores);
     }
-
-
 }

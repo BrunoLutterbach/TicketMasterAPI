@@ -1,8 +1,10 @@
 package br.com.brunolutterbach.ticketmasterapi.controller;
 
+import br.com.brunolutterbach.ticketmasterapi.model.endereco.DadosEndereco;
 import br.com.brunolutterbach.ticketmasterapi.model.usuario.DadosCadastroUsuario;
 import br.com.brunolutterbach.ticketmasterapi.model.usuario.DadosListagemUsuario;
 import br.com.brunolutterbach.ticketmasterapi.service.UsuarioService;
+import br.com.brunolutterbach.ticketmasterapi.utils.UsuarioLogadoUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/usuario")
@@ -17,6 +20,7 @@ import javax.transaction.Transactional;
 public class UsuarioController {
 
     final UsuarioService usuarioService;
+    final UsuarioLogadoUtil logadoUtil;
 
     @PostMapping()
     @Transactional
@@ -24,6 +28,13 @@ public class UsuarioController {
         var usuario = usuarioService.cadastrar(dados);
         var uri = builder.path("/api/usuario/{id}").buildAndExpand(usuario.id()).toUri();
         return ResponseEntity.created(uri).body(usuario);
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    @GetMapping("/enderecos")
+    public ResponseEntity<List<DadosEndereco>> listarEnderecos() {
+        var usuario = usuarioService.buscarEnderecos(logadoUtil.obterUsuarioLogado().getId());
+        return ResponseEntity.ok(usuario);
     }
 
     @PreAuthorize("hasRole('ADMIN')")

@@ -1,6 +1,7 @@
 package br.com.brunolutterbach.ticketmasterapi.model.endereco;
 
 import br.com.brunolutterbach.ticketmasterapi.model.evento.Evento;
+import br.com.brunolutterbach.ticketmasterapi.model.usuario.Usuario;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -19,14 +20,21 @@ public class Endereco {
     @OneToOne(mappedBy = "enderecoEvento")
     private Evento evento;
 
-    public Endereco(DadosEndereco endereco) {
-        this.logradouro = endereco.logradouro();
-        this.cep = endereco.cep();
-        this.numero = endereco.numero();
-        this.cidade = endereco.cidade();
+    public Endereco() {
     }
 
-    public Endereco() {
+    public Endereco(DadosCadastroEndereco dados) {
+        this.logradouro = dados.logradouro();
+        this.cep = dados.cep();
+        this.numero = dados.numero();
+        this.cidade = dados.cidade();
+    }
+
+    public Endereco(DadosCadastroEndereco dados, Usuario usuario) {
+        this.logradouro = dados.logradouro();
+        this.cep = dados.cep();
+        this.numero = dados.numero();
+        this.cidade = dados.cidade();
     }
 
     @Override
@@ -38,5 +46,20 @@ public class Endereco {
                 ", numero='" + numero + '\'' +
                 ", cidade='" + cidade + '\'' +
                 '}';
+    }
+
+    public void atualizar(DadosAtualizacaoEndereco dados) {
+        if (dados.logradouro() != null) {
+            this.logradouro = dados.logradouro();
+        }
+        if (dados.cep() != null) {
+            this.cep = dados.cep();
+        }
+        if (dados.numero() != null) {
+            this.numero = dados.numero();
+        }
+        if (dados.cidade() != null) {
+            this.cidade = dados.cidade();
+        }
     }
 }
