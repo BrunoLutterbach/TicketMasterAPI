@@ -1,6 +1,7 @@
 package br.com.brunolutterbach.ticketmasterapi.controller;
 
 import br.com.brunolutterbach.ticketmasterapi.model.endereco.DadosEndereco;
+import br.com.brunolutterbach.ticketmasterapi.model.usuario.DadosAtualizacaoUsuario;
 import br.com.brunolutterbach.ticketmasterapi.model.usuario.DadosCadastroUsuario;
 import br.com.brunolutterbach.ticketmasterapi.model.usuario.DadosListagemUsuario;
 import br.com.brunolutterbach.ticketmasterapi.service.UsuarioService;
@@ -28,6 +29,14 @@ public class UsuarioController {
         var usuario = usuarioService.cadastrar(dados);
         var uri = builder.path("/api/usuario/{id}").buildAndExpand(usuario.id()).toUri();
         return ResponseEntity.created(uri).body(usuario);
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    @PutMapping()
+    @Transactional
+    public ResponseEntity<DadosListagemUsuario> atualizar(@RequestBody DadosAtualizacaoUsuario dados) {
+        var usuario = usuarioService.atualizar(dados, logadoUtil.obterUsuarioLogado());
+        return ResponseEntity.ok(usuario);
     }
 
     @PreAuthorize("hasRole('USER')")
