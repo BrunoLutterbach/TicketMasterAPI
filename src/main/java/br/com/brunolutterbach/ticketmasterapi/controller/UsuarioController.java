@@ -4,6 +4,7 @@ import br.com.brunolutterbach.ticketmasterapi.model.endereco.DadosEndereco;
 import br.com.brunolutterbach.ticketmasterapi.model.usuario.DadosAtualizacaoUsuario;
 import br.com.brunolutterbach.ticketmasterapi.model.usuario.DadosCadastroUsuario;
 import br.com.brunolutterbach.ticketmasterapi.model.usuario.DadosListagemUsuario;
+import br.com.brunolutterbach.ticketmasterapi.model.usuario.DadosListagemUsuarioEndereco;
 import br.com.brunolutterbach.ticketmasterapi.service.UsuarioService;
 import br.com.brunolutterbach.ticketmasterapi.utils.UsuarioLogadoUtil;
 import lombok.AllArgsConstructor;
@@ -16,7 +17,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/usuario")
+@RequestMapping("/api/users")
 @AllArgsConstructor
 public class UsuarioController {
 
@@ -50,6 +51,13 @@ public class UsuarioController {
     @GetMapping("/{id}")
     public ResponseEntity<DadosListagemUsuario> getUsuario(@PathVariable Long id) {
         var usuario = usuarioService.buscarPorId(id);
+        return ResponseEntity.ok(usuario);
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/{id}/enderecos")
+    public ResponseEntity<DadosListagemUsuarioEndereco> getUsuarioComEndereco(@PathVariable Long id) {
+        var usuario = usuarioService.buscarUsuarioComEndereco(id);
         return ResponseEntity.ok(usuario);
     }
 
