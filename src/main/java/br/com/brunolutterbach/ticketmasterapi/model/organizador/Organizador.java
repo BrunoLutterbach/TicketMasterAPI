@@ -37,11 +37,21 @@ public class Organizador {
 
     }
 
-    public void atualizar(DadosCadastroOrganizador dados) {
-        this.nomeEmpresa = dados.nomeEmpresa();
-        this.email = dados.email();
-        this.site = dados.site();
-        this.cnpj = dados.cnpj();
-        this.telefone = dados.telefone();
+    public void atualizar(DadosAtualizacaoOrganizador dados) {
+        if (dados.nomeEmpresa() != null) {
+            this.nomeEmpresa = dados.nomeEmpresa();
+        }
+        if (dados.email() != null) {
+            this.email = dados.email();
+        }
+        if (dados.site() != null) {
+            this.site = dados.site();
+        }
+        if (dados.cnpj() != null) {
+            this.cnpj = dados.cnpj();
+        }
+        if (dados.telefone() != null) {
+            this.telefone = dados.telefone();
+        }
     }
 }
