@@ -1,11 +1,10 @@
 package br.com.brunolutterbach.ticketmasterapi.service;
 
+import br.com.brunolutterbach.ticketmasterapi.exception.ValidacaoException;
 import br.com.brunolutterbach.ticketmasterapi.model.enums.StatusIngresso;
-import br.com.brunolutterbach.ticketmasterapi.model.ingresso.DadosCompraIngresso;
-import br.com.brunolutterbach.ticketmasterapi.model.ingresso.DadosIngressosUsuario;
-import br.com.brunolutterbach.ticketmasterapi.model.ingresso.DadosPedidoIngressoDetalhado;
-import br.com.brunolutterbach.ticketmasterapi.model.ingresso.Ingresso;
+import br.com.brunolutterbach.ticketmasterapi.model.ingresso.*;
 import br.com.brunolutterbach.ticketmasterapi.model.ingresso.validacoes.IngressoValidator;
+import br.com.brunolutterbach.ticketmasterapi.repository.EventoRepository;
 import br.com.brunolutterbach.ticketmasterapi.repository.IngressoRepository;
 import br.com.brunolutterbach.ticketmasterapi.repository.UsuarioRepository;
 import br.com.brunolutterbach.ticketmasterapi.utils.UsuarioLogadoUtil;
@@ -15,8 +14,10 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.xml.bind.ValidationException;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.chrono.ChronoLocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +34,7 @@ public class IngressoService {
     final UsuarioRepository usuarioRepository;
     final EmailService emailService;
     final UsuarioLogadoUtil logadoUtil;
+    final EventoRepository eventoRepository;
 
 
     public void cadastrar(Ingresso ingresso) {
@@ -81,7 +83,7 @@ public class IngressoService {
         return repository.findIngressoByPaymentId(paymentId);
     }
 
-    @Scheduled(fixedDelay = 600000) // 5m
+    @Scheduled(fixedDelay = 300000)
     public void liberarIngressosAguardandoPagamento() {
         List<Ingresso> ingressos = repository.findByCompradorIsNotNullAndStatusIngresso(StatusIngresso.AGUARDANDO_PAGAMENTO);
 
@@ -95,9 +97,25 @@ public class IngressoService {
                     ingresso.setComprador(null);
                     ingresso.setDataReserva(null);
                     ingresso.setStatusIngresso(StatusIngresso.CRIADO);
+                    ingresso.setPaymentId(null);
                     repository.save(ingresso);
                 }
             }
         }
+    }
+
+    public DadosIngresso atualizarValorIngresso(DadosAtualizacaoIngresso dados, Long id) {
+        var evento = eventoRepository.findById(id).orElseThrow();
+        if (evento.getDataEvento().isBefore(ChronoLocalDate.from(LocalDateTime.now())) ||
+                evento.getHoraEvento().isBefore(LocalDateTime.now().toLocalTime())) {
+            throw new ValidacaoException("O evento já começou ou passou, não é possível alterar o valor do ingresso.");
+        }
+
+        var ingressos = repository.findByEventoIdAndCompradorIsNull(id);
+        for (var ingresso : ingressos) {
+            ingresso.setValor(dados.valor());
+            repository.save(ingresso);
+        }
+        return new DadosIngresso(ingressos.get(0));
     }
 }
