@@ -1,6 +1,7 @@
 package br.com.brunolutterbach.ticketmasterapi.controller;
 
 
+import br.com.brunolutterbach.ticketmasterapi.model.organizador.DadosAtualizacaoOrganizador;
 import br.com.brunolutterbach.ticketmasterapi.model.organizador.DadosCadastroOrganizador;
 import br.com.brunolutterbach.ticketmasterapi.model.organizador.DadosListagemUsuarioOrganizador;
 import br.com.brunolutterbach.ticketmasterapi.service.OrganizadorService;
@@ -32,10 +33,10 @@ public class OrganizadorController {
     }
 
     @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZADOR')")
-    @PutMapping("/{id}")
+    @PutMapping()
     @Transactional
-    public ResponseEntity<DadosListagemUsuarioOrganizador> atualizarOrganizador(@RequestBody DadosCadastroOrganizador dados, @PathVariable Long id) {
-        var organizador = orgService.atualizarOrganizador(dados, id);
+    public ResponseEntity<DadosListagemUsuarioOrganizador> atualizarOrganizador(@RequestBody DadosAtualizacaoOrganizador dados) {
+        var organizador = orgService.atualizarOrganizador(dados, logadoUtil.obterUsuarioLogado().getOrganizador().getId());
         return ResponseEntity.ok(organizador);
     }
 
