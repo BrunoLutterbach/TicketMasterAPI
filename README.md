@@ -230,7 +230,39 @@ O sistema oferece as funcionalidades de autenticação, gerenciamento de usuári
 
 ![image](https://github.com/BrunoLutterbach/TicketMasterAPI/assets/95001637/aea685d7-25a3-4a1b-95b9-a1e97bbd8547)
 
+#
+#### 4.2 Atualizar Evento
+| Método | Rota               | Descrição                    | JSON |
+|--------|--------------------|------------------------------|------|
+| PUT    | /api/evento/{id} | Atualizar Evento | <pre>{<br>    "nome": "Evento Teste 1 Atualizado",  <br>    "descricao": "Descrição do Evento Teste 1 Atualizado",<br>    "categoriaEvento": "TEATRO"<br> }  <br></p>
+ </pre> |
+ 
+ ![image](https://github.com/BrunoLutterbach/TicketMasterAPI/assets/95001637/3c407ece-27b5-4d5f-b30b-cb0c6ffb8460)
 
+#
+#### 4.3 Listar Eventos
+| Método | Rota            | Descrição                  | 
+| --- |-----------------|----------------------------| 
+|GET | /api/eventos | Retornar todos os Eventos |
+ 
+![image](https://github.com/BrunoLutterbach/TicketMasterAPI/assets/95001637/0568aa2d-97ee-4741-be29-5e29e2d18eff)
+
+#
+#### 4.4 Obter Evento por ID
+| Método | Rota            | Descrição                  | 
+| --- |-----------------|----------------------------| 
+|GET | /api/evento/{id} | Retornar um Evento por id |
+![image](https://github.com/BrunoLutterbach/TicketMasterAPI/assets/95001637/fb6fd764-ab21-41ac-8f70-873fe5b739aa)
+
+#
+#### 4.5
+| Método | Rota | Descrição        | 
+| --- | --- |------------------| 
+|DEL | /api/evento/{id} | Deletar Evento |
+
+<hr>
+
+### 5 Ingresso
 
 
 
