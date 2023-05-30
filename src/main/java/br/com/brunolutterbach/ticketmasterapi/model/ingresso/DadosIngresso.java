@@ -14,4 +14,7 @@ public record DadosIngresso(
         int quantidadeDisponivel
 
 ) {
+    public DadosIngresso(Ingresso ingresso) {
+        this(ingresso.getEvento().getId(), ingresso.getValor(), ingresso.getEvento().getQuantidadeIngressos());
+    }
 }
