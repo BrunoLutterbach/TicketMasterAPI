@@ -17,11 +17,14 @@ public interface IngressoRepository extends JpaRepository<Ingresso, UUID> {
 
     Optional<Ingresso> findById(UUID id);
 
-    @Query("SELECT new br.com.brunolutterbach.ticketmasterapi.model.ingresso.DadosIngressosUsuario(i.evento.nome, i.evento.descricao, i.evento.dataEvento, i.evento.horaEvento, i.evento.statusEvento, i.valor, i.dataCompra, i.dataValidade) FROM Ingresso i WHERE i.comprador.id = ?1")
+    @Query("SELECT new br.com.brunolutterbach.ticketmasterapi.model.ingresso.DadosIngressosUsuario(i.statusIngresso, i.evento.nome, i.evento.descricao, i.evento.dataEvento, i.evento.horaEvento, i.evento.statusEvento, i.valor, i.dataCompra, i.dataValidade) FROM Ingresso i WHERE i.comprador.id = ?1")
     List<DadosIngressosUsuario> findIngressosByCompradorId(Long id);
 
     List<Ingresso> findIngressoByPaymentId(String paymentId);
 
     List<Ingresso> findByCompradorIsNotNullAndStatusIngresso(StatusIngresso statusIngresso);
 
+    List<Ingresso> findByEventoId(Long id);
+
+    List<Ingresso> findByEventoIdAndCompradorIsNull(Long id);
 }
