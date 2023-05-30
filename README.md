@@ -30,6 +30,8 @@ O sistema oferece as funcionalidades de autenticação, gerenciamento de usuári
 
 - Autenticação e autorização: Implementação de autenticação e autorização de usuários com base em roles utilizando o Spring Security.
 
+- Notificação por e-mail quando é realizado a reserva de Ingresso, compra de Ingresso e atualização de Evento.
+
 
 <hr>
 
@@ -238,6 +240,10 @@ O sistema oferece as funcionalidades de autenticação, gerenciamento de usuári
  </pre> |
  
  ![image](https://github.com/BrunoLutterbach/TicketMasterAPI/assets/95001637/3c407ece-27b5-4d5f-b30b-cb0c6ffb8460)
+
+##### E-mail encaminhado a todos os Usuários que realizaram a compra de um Ingresso do Evento que foi atualizado
+![image](https://github.com/BrunoLutterbach/TicketMasterAPI/assets/95001637/bd2ac103-f742-4976-bbc7-d7db1cea76c5)
+
 
 #
 #### 4.3 Listar Eventos
