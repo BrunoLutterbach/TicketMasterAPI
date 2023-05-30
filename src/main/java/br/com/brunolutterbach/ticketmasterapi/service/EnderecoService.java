@@ -1,5 +1,6 @@
 package br.com.brunolutterbach.ticketmasterapi.service;
 
+import br.com.brunolutterbach.ticketmasterapi.exception.ValidacaoException;
 import br.com.brunolutterbach.ticketmasterapi.model.endereco.DadosAtualizacaoEndereco;
 import br.com.brunolutterbach.ticketmasterapi.model.endereco.DadosCadastroEndereco;
 import br.com.brunolutterbach.ticketmasterapi.model.endereco.DadosEndereco;
@@ -20,7 +21,7 @@ public class EnderecoService {
         if (repository.existsById(id)) {
             repository.deleteById(id);
         }
-        throw new IllegalArgumentException("Endereço não encontrado");
+        throw new ValidacaoException("Endereço não encontrado");
     }
 
 
