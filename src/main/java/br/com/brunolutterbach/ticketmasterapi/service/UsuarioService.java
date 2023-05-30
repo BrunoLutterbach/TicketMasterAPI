@@ -1,10 +1,7 @@
 package br.com.brunolutterbach.ticketmasterapi.service;
 
 import br.com.brunolutterbach.ticketmasterapi.model.endereco.DadosEndereco;
-import br.com.brunolutterbach.ticketmasterapi.model.usuario.DadosAtualizacaoUsuario;
-import br.com.brunolutterbach.ticketmasterapi.model.usuario.DadosCadastroUsuario;
-import br.com.brunolutterbach.ticketmasterapi.model.usuario.DadosListagemUsuario;
-import br.com.brunolutterbach.ticketmasterapi.model.usuario.Usuario;
+import br.com.brunolutterbach.ticketmasterapi.model.usuario.*;
 import br.com.brunolutterbach.ticketmasterapi.repository.RoleRepository;
 import br.com.brunolutterbach.ticketmasterapi.repository.UsuarioRepository;
 import lombok.AllArgsConstructor;
@@ -47,5 +44,10 @@ public class UsuarioService {
         usuario.atualizar(dados);
         repository.save(usuario);
         return new DadosListagemUsuario(usuario);
+    }
+
+    public DadosListagemUsuarioEndereco buscarUsuarioComEndereco(Long id) {
+        var usuario = repository.findById(id).orElseThrow();
+        return new DadosListagemUsuarioEndereco(usuario);
     }
 }
