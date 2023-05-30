@@ -213,7 +213,20 @@ O sistema oferece as funcionalidades de autenticação, gerenciamento de usuári
 #### 4.1 Cadastrar Evento
 | Método | Rota | Descrição            | JSON | 
 | --- | --- |----------------------| --- | 
-|POST | /api/evento/ | Cadastrar um Evento |  <pre>{ <br>  "nome": "Evento Teste 1",<br>  "descricao": "Descrição do evento teste 1",<br>  "images": [<br>     "[https://www.example.com/image1.jpg](https://exemplo.com/imagem1.jpg)",<br>     "https://www.example.com/image2.jpg"<br> ], <br>"quantidadeIngressoDisponivel": 30,<br>"valorIngresso": 50.0,<br>"dataEvento": "30/05/2023",<br>"horaEvento": "20:00",<br>"statusEvento": "AGENDADO",<br>"categoriaEvento": "MUSICA",<br>  "endereco": {<br>   "logradouro": "Rua Exemplo",<br>   "cep": "12345-678",<br>   "numero": "100",<br>   "cidade": "São Paulo"<br>  } <br> }</p></pre> |
+|POST | /api/evento/ | Cadastrar um Evento |  <pre>{ <br>  "nome": "Evento Teste 1",<br>  "descricao": "Descrição do evento teste 1",<br>  "images": [<br>     "[https://www.example.com/image1.jpg](https://exemplo.com/imagem1.jpg)",<br>     "https://www.example.com/image2.jpg"<br> ], <br>"quantidadeIngressoDisponivel": 30,<br>"valorIngresso": 50.0,<br>"dataEvento": "30/05/2023",<br>"horaEvento": "20:00",<br>"statusEvento": "AGENDADO",<br>"categoriaEvento": "MUSICA",<br> "endereco": {<br>   "logradouro": "Rua Exemplo",<br>   "cep": "12345-678",<br>   "numero": "100",<br>   "cidade": "São Paulo"<br>  } <br> }</p></pre> |
+
+ | Nome  | Descrição   |
+| --- |-------------|
+|nome | Obrigatório |
+|descricao | Obrigatório |
+|imagens | Obrigatório |
+|quantidadeIngressoDisponivel | Obrigatório |
+|valorIngresso | Obrigatório |
+|dataEvento | Obrigatório |
+|horaEvento | Obrigatório |
+|statusEvento | Obrigatório |
+|categoriaEvento | Obrigatório |
+|endereco | Obrigatório |
 
 ![image](https://github.com/BrunoLutterbach/TicketMasterAPI/assets/95001637/aea685d7-25a3-4a1b-95b9-a1e97bbd8547)
 
