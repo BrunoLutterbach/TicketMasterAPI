@@ -1,5 +1,7 @@
 package br.com.brunolutterbach.ticketmasterapi.service;
 
+import br.com.brunolutterbach.ticketmasterapi.exception.ValidacaoException;
+import br.com.brunolutterbach.ticketmasterapi.model.organizador.DadosAtualizacaoOrganizador;
 import br.com.brunolutterbach.ticketmasterapi.model.organizador.DadosCadastroOrganizador;
 import br.com.brunolutterbach.ticketmasterapi.model.organizador.DadosListagemUsuarioOrganizador;
 import br.com.brunolutterbach.ticketmasterapi.model.organizador.Organizador;
@@ -21,7 +23,7 @@ public class OrganizadorService {
 
     public DadosListagemUsuarioOrganizador cadastrarOrganizador(DadosCadastroOrganizador dados, Usuario usuarioLogado) {
         if (usuarioLogado.getOrganizador() != null) {
-            throw new IllegalStateException("O usuário já possui um organizador.");
+            throw new ValidacaoException("O usuário já possui um organizador.");
         }
 
         var organizador = new Organizador(dados, usuarioLogado);
@@ -30,7 +32,7 @@ public class OrganizadorService {
         return new DadosListagemUsuarioOrganizador(organizador);
     }
 
-    public DadosListagemUsuarioOrganizador atualizarOrganizador(DadosCadastroOrganizador dados, Long id) {
+    public DadosListagemUsuarioOrganizador atualizarOrganizador(DadosAtualizacaoOrganizador dados, Long id) {
         var organizador = repository.getReferenceById(id);
         organizador.atualizar(dados);
         repository.save(organizador);
