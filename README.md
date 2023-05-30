@@ -320,9 +320,12 @@ O sistema oferece as funcionalidades de autenticação, gerenciamento de usuári
 
 ![image](https://github.com/BrunoLutterbach/TicketMasterAPI/assets/95001637/ef7d498f-c695-41b3-a888-4b2d2965047e)
 
+<hr>
 
+#### Testes
 
- 
+![—Pngtree—red banner coming soon_5339480](https://github.com/BrunoLutterbach/TicketMasterAPI/assets/95001637/8bf4c4ec-f86f-4d42-a35c-8b4cf8acf747)
+
 
 
 
