@@ -40,12 +40,12 @@ public class EventoService {
         return new DadosDetalhamentoEvento(repository.findById(id).orElseThrow());
     }
 
-    public DadosAtualizacaoEvento atualizarInformacoes(Long id, DadosAtualizacaoEvento dados) throws Exception {
+    public DadosDetalhamentoEvento atualizarInformacoes(Long id, DadosAtualizacaoEvento dados) throws Exception {
         var evento = repository.getReferenceById(id);
         evento.atualizar(dados);
         repository.save(evento);
         emailService.enviarEmailAtualizacaoEvento(evento);
-        return new DadosAtualizacaoEvento(evento);
+        return new DadosDetalhamentoEvento(evento);
     }
 
     public void deletarEvento(Long id) {
