@@ -252,6 +252,7 @@ O sistema oferece as funcionalidades de autenticação, gerenciamento de usuári
 | Método | Rota            | Descrição                  | 
 | --- |-----------------|----------------------------| 
 |GET | /api/evento/{id} | Retornar um Evento por id |
+
 ![image](https://github.com/BrunoLutterbach/TicketMasterAPI/assets/95001637/fb6fd764-ab21-41ac-8f70-873fe5b739aa)
 
 #
@@ -263,6 +264,60 @@ O sistema oferece as funcionalidades de autenticação, gerenciamento de usuári
 <hr>
 
 ### 5 Ingresso
+
+#
+#### 5.1 Comprar Ingresso
+| Método | Rota            | Descrição                  | 
+| --- |-----------------|----------------------------| 
+|POST | /api/ingresso/comprar | Gera link de pagamento para o Ingresso |
+
+ | Nome  | Descrição   |
+| --- |-------------|
+|idEvento | Obrigatório |
+|quantidade | Obrigatório |
+
+![image](https://github.com/BrunoLutterbach/TicketMasterAPI/assets/95001637/41d7edbf-59b5-443a-8b38-e4e346c8aee8)
+
+###### Ao solicitar a compra do Ingresso, no banco de dados, o Ingresso é atribuido ao usuário por 5 minutos e status alterado para AGUARDANDO_PAGAMENTO, caso o pagamento não seja concluído, o Ingresso é liberado para compra novamente.
+![image](https://github.com/BrunoLutterbach/TicketMasterAPI/assets/95001637/4d7528c9-9189-49f2-b408-6657a8ab139e)
+
+###### Quando o pagamento é realizado, o status é alterado para PAGO.
+![image](https://github.com/BrunoLutterbach/TicketMasterAPI/assets/95001637/2c96ffe3-1a2b-418c-982c-8b096b4687c3)
+
+##### E-mail recebido após solicitar a compra do Ingresso
+![image](https://github.com/BrunoLutterbach/TicketMasterAPI/assets/95001637/e190c3c2-22eb-4ce6-a85e-a293ebc9a3e2)
+
+##### E-mail recebido com o QR CODE após finalizar o pagamento no PayPal
+![image](https://github.com/BrunoLutterbach/TicketMasterAPI/assets/95001637/787ff6d4-e190-4e1b-8304-896ee3f534f4)
+
+##### O QR CODE em anexo contém o UUID de cada Ingresso comprado e o nome do Usuário que realizou a compra
+![image](https://github.com/BrunoLutterbach/TicketMasterAPI/assets/95001637/353a80b5-d9ca-48f2-8843-fe3dad11df87)
+
+<pre>[<br> DadosIngressoQrCode[uuid=051ab7d2-7b62-40ff-b7e6-5db5c54ffc54, nomeComprador=Bruno Lutterbach Pereira Marques],<br> DadosIngressoQrCode[uuid=08462828-19c9-4332-a40e-0f8eb0e5fb8c, nomeComprador=Bruno Lutterbach Pereira Marques],<br> DadosIngressoQrCode[uuid=0f37e2e4-1d26-4490-b3ed-5bd6b994eea3, nomeComprador=Bruno Lutterbach Pereira Marques]<br>]</pre>
+
+#
+#### 5.2 Atualizar valor do Ingresso
+| Método | Rota            | Descrição                  | JSON |
+| --- |-----------------|----------------------------| ------ |
+|PUT | /api/ingresso/{id} | Atualiza o valor de todos os Ingressos disponíveis | <pre>{<br>   "valor": 35.0,  <br>}  <br></p>
+ </pre> |
+ 
+  | Nome  | Descrição   |
+| --- |-------------|
+ |valor | Obrigatório |
+ 
+ #
+ #### 5.3 Listar Ingressos do Usuário por ID
+ | Método | Rota | Descrição        | 
+| --- | --- |------------------| 
+|GET | /api/ingresso/{id} | Obter os Ingresso do Usuário por ID |
+
+![image](https://github.com/BrunoLutterbach/TicketMasterAPI/assets/95001637/ef7d498f-c695-41b3-a888-4b2d2965047e)
+
+
+
+ 
+
 
 
 
