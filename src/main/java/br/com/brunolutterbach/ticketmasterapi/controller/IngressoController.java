@@ -1,10 +1,7 @@
 package br.com.brunolutterbach.ticketmasterapi.controller;
 
 import br.com.brunolutterbach.ticketmasterapi.model.enums.StatusIngresso;
-import br.com.brunolutterbach.ticketmasterapi.model.ingresso.DadosCompraIngresso;
-import br.com.brunolutterbach.ticketmasterapi.model.ingresso.DadosIngressoQrCode;
-import br.com.brunolutterbach.ticketmasterapi.model.ingresso.DadosIngressosUsuario;
-import br.com.brunolutterbach.ticketmasterapi.model.ingresso.DadosPedidoIngressoDetalhado;
+import br.com.brunolutterbach.ticketmasterapi.model.ingresso.*;
 import br.com.brunolutterbach.ticketmasterapi.service.EmailService;
 import br.com.brunolutterbach.ticketmasterapi.service.EventoService;
 import br.com.brunolutterbach.ticketmasterapi.service.IngressoService;
@@ -16,6 +13,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -37,6 +35,14 @@ public class IngressoController {
     public ResponseEntity<DadosPedidoIngressoDetalhado> comprarIngresso(@RequestBody DadosCompraIngresso dados, HttpServletRequest httpServletRequest) throws Exception {
         var pedido = ingressoService.comprarIngresso(dados, httpServletRequest);
         return ResponseEntity.ok(pedido);
+    }
+
+    @PreAuthorize("hasRole('ROLE_ORGANIZADOR')")
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity<DadosIngresso> atualizarValorIngressos(@RequestBody DadosAtualizacaoIngresso dados, @PathVariable Long id) {
+        var ingresso = ingressoService.atualizarValorIngresso(dados, id);
+        return ResponseEntity.ok(ingresso);
     }
 
     @GetMapping("/pagamento-concluido")
@@ -84,3 +90,4 @@ public class IngressoController {
     }
 
 }
+
