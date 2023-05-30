@@ -37,7 +37,7 @@ public class EventoController {
     @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZADOR')")
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity<DadosAtualizacaoEvento> atualizarEvento(@PathVariable Long id, @RequestBody DadosAtualizacaoEvento dados) throws Exception {
+    public ResponseEntity<DadosDetalhamentoEvento> atualizarEvento(@PathVariable Long id, @RequestBody DadosAtualizacaoEvento dados) throws Exception {
         var evento = eventoService.atualizarInformacoes(id, dados);
         return ResponseEntity.ok(evento);
     }
