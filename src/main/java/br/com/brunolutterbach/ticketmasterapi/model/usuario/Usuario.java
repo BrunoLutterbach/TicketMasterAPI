@@ -108,12 +108,12 @@ public class Usuario implements UserDetails {
         if (dados.nome() != null) {
             this.nome = dados.nome();
         }
+        if (dados.senha() != null) {
+            var encoder = new BCryptPasswordEncoder();
+            this.senha = encoder.encode(dados.senha());
+        }
         if (dados.email() != null) {
             this.email = dados.email();
-        }
-        if (dados.senha() != null) {
-            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-            this.senha = encoder.encode(dados.senha());
         }
     }
 }
