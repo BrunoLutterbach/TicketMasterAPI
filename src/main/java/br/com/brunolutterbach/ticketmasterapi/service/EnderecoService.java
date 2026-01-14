@@ -18,10 +18,10 @@ public class EnderecoService {
 
 
     public void remover(Long id) {
-        if (repository.existsById(id)) {
-            repository.deleteById(id);
+        if (!repository.existsById(id)) {
+            throw new ValidacaoException("Endereço não encontrado");
         }
-        throw new ValidacaoException("Endereço não encontrado");
+        repository.deleteById(id);
     }
 
 

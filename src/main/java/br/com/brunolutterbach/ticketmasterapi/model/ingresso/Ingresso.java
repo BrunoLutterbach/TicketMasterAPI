@@ -6,7 +6,7 @@ import br.com.brunolutterbach.ticketmasterapi.model.usuario.Usuario;
 import lombok.Data;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -17,7 +17,6 @@ public class Ingresso {
 
     @Id
     @Column(name = "id")
-    @Type(type = "uuid-char")
     private UUID id = UUID.randomUUID();
     private BigDecimal valor = BigDecimal.ZERO;
     private LocalDateTime dataCompra;

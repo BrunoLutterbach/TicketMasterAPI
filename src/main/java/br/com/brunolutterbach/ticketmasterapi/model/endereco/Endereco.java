@@ -4,7 +4,7 @@ import br.com.brunolutterbach.ticketmasterapi.model.evento.Evento;
 import br.com.brunolutterbach.ticketmasterapi.model.usuario.Usuario;
 import lombok.Data;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Data

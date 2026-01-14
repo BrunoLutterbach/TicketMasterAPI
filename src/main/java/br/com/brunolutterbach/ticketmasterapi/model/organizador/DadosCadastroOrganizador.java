@@ -1,6 +1,6 @@
 package br.com.brunolutterbach.ticketmasterapi.model.organizador;
 
-import javax.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank;
 
 public record DadosCadastroOrganizador(
         @NotBlank
