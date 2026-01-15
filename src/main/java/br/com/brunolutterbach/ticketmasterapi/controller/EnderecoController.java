@@ -3,6 +3,7 @@ package br.com.brunolutterbach.ticketmasterapi.controller;
 import br.com.brunolutterbach.ticketmasterapi.model.endereco.DadosAtualizacaoEndereco;
 import br.com.brunolutterbach.ticketmasterapi.model.endereco.DadosCadastroEndereco;
 import br.com.brunolutterbach.ticketmasterapi.model.endereco.DadosEndereco;
+import br.com.brunolutterbach.ticketmasterapi.model.endereco.Endereco;
 import br.com.brunolutterbach.ticketmasterapi.service.EnderecoService;
 import br.com.brunolutterbach.ticketmasterapi.utils.UsuarioLogadoUtil;
 import lombok.AllArgsConstructor;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/endereco")
@@ -49,5 +52,12 @@ public class EnderecoController {
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
         enderecoService.remover(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    @GetMapping("/all")
+    public ResponseEntity<List<DadosEndereco>> listarTodosEnderecos() {
+        var enderecos = enderecoService.listarTodosEnderecos();
+        return ResponseEntity.ok(enderecos);
     }
 }
